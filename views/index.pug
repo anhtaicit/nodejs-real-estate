@@ -5,33 +5,37 @@ block content
   p.text-center QUOC BAO REAL ESTATE
   p.text-center(ng-show="loading")
     span.fa.fa-spinner.fa-spin.fa-3x 
-  .table-responsive
-    table.table.table-striped.table-bordered.table-hover
-      thead.thead-dark
-        tr
-          td Khu
-          td Block
-          td Lô số
-          td Chủ đất
-          td SDT chủ đất
-          td Người giới thiệu
-          td SDT người giới thiệu
-          td Ngày gửi
-          td Giá
-          td Ghi chú
-          td Tình trạng
-          td Ngày bán
-      tbody
-        tr(ng-repeat="land in lands")
-          td(editable-text="land.area",e-form="landarea",ng-click="landarea.$show()", onaftersave="updateLand(land)") {{land.area}}
-          td(editable-text="land.block",e-form="landblock",ng-click="landblock.$show()", onaftersave="updateLand(land)") {{land.block}}
-          td(editable-text="land.portion",e-form="landportion",ng-click="landportion.$show()", onaftersave="updateLand(land)") {{land.portion}}
-          td(editable-text="land.owner",e-form="landowner",ng-click="landowner.$show()", onaftersave="updateLand(land)") {{land.owner}}
-          td(editable-text="land.ownerPhone",e-form="landownerPhone",ng-click="landownerPhone.$show()", onaftersave="updateLand(land)") {{land.ownerPhone}}
-          td(editable-text="land.referrer",e-form="landreferrer",ng-click="landreferrer.$show()", onaftersave="updateLand(land)") {{land.referrer}}
-          td(editable-text="land.referrerPhone",e-form="landreferrerPhone",ng-click="landreferrerPhone.$show()", onaftersave="updateLand(land)") {{land.referrerPhone}}
-          td(editable-text="land.depositDate",e-form="landdepositDate",ng-click="landdepositDate.$show()", onaftersave="updateLand(land)") {{land.depositDate}}
-          td(editable-text="land.price",e-form="landprice",ng-click="landprice.$show()", onaftersave="updateLand(land)") {{land.price}}
-          td(editable-text="land.note",e-form="landnote",ng-click="landnote.$show()", onaftersave="updateLand(land)") {{land.note}}
-          td(editable-text="land.isSold",e-form="landisSold",ng-click="landisSold.$show()", onaftersave="updateLand(land)") {{land.isSold===false?"Chưa bán":"Đã bán"}}
-          td(editable-text="land.soldDate",e-form="landsoldDate",ng-click="landsoldDate.$show()", onaftersave="updateLand(land)") {{land.soldDate}}
+  .row
+    .table-responsive
+      table#landTable.table.table-striped.table-bordered.table-hover
+        thead.thead-dark
+          tr.filters
+            th
+            th Khu
+            th Lốc
+            th Lô 
+            th Chủ đất
+            th SDT chủ đất
+            th Người GT
+            th SDT người GT
+            th Ngày gửi
+            th Giá
+            th Ghi chú
+            th Tình trạng
+            th Ngày bán
+        tbody
+          tr(ng-repeat="land in lands")
+            td
+              button.btn.btn-danger(ng-click="deleteLand(land)") Xoá
+            td(editable-text="land.area",e-form="landarea",ng-click="landarea.$show()", onaftersave="updateLand(land)") {{land.area}}
+            td(editable-text="land.block",e-form="landblock",ng-click="landblock.$show()", onaftersave="updateLand(land)") {{land.block}}
+            td(editable-text="land.portion",e-form="landportion",ng-click="landportion.$show()", onaftersave="updateLand(land)") {{land.portion}}
+            td(editable-text="land.owner",e-form="landowner",ng-click="landowner.$show()", onaftersave="updateLand(land)") {{land.owner}}
+            td(editable-text="land.ownerPhone",e-form="landownerPhone",ng-click="landownerPhone.$show()", onaftersave="updateLand(land)") {{land.ownerPhone}}
+            td(editable-text="land.referrer",e-form="landreferrer",ng-click="landreferrer.$show()", onaftersave="updateLand(land)") {{land.referrer}}
+            td(editable-text="land.referrerPhone",e-form="landreferrerPhone",ng-click="landreferrerPhone.$show()", onaftersave="updateLand(land)") {{land.referrerPhone}}
+            td(editable-text="land.depositDate",e-form="landdepositDate",ng-click="landdepositDate.$show()", onaftersave="updateLand(land)") {{land.depositDate}}
+            td(editable-text="land.price",e-form="landprice",ng-click="landprice.$show()", onaftersave="updateLand(land)") {{land.price}}
+            td(editable-text="land.note",e-form="landnote",ng-click="landnote.$show()", onaftersave="updateLand(land)") {{land.note}}
+            td(editable-text="land.isSold",e-form="landisSold",ng-click="landisSold.$show()", onaftersave="updateLand(land)") {{land.isSold===false?"Chưa bán":"Đã bán"}}
+            td(editable-text="land.soldDate",e-form="landsoldDate",ng-click="landsoldDate.$show()", onaftersave="updateLand(land)") {{land.soldDate | date:'dd/MM/yyyy'}}
