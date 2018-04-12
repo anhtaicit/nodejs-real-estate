@@ -12,6 +12,34 @@ p.text-center {
   font-size: 30px;
 }
 
+p.address {
+  color: royalblue;
+  text-align: center;
+  font-family: inherit;
+  font-weight: bold;
+}
+
+.phoneInfo {
+  text-align: center;
+}
+
+p.phone {
+  color: royalblue;
+  text-align: center;
+  font-family: inherit;
+  display: inline-block;
+  font-weight: bold;
+}
+
+p.phoneNumber {
+  color: red;
+  text-align: center;
+  font-family: inherit;
+  display: inline-block;
+  font-weight: bold;
+  margin-left: 5px;
+}
+
 thead {
   background-color: darkslategray;
   color: white;
@@ -27,4 +55,36 @@ thead {
   text-align: center;
   display:table-cell;
   vertical-align: middle;
+}
+
+.btn-primary {
+  background-color: royalblue;
+}
+
+.nav-pills:active {
+  background-color: red; 
+}
+
+#addNewBtn {
+  margin-bottom: 10px;
+}
+
+#isSoldChk {
+  margin-top: 10px;
+  margin-left: 10px;
+  vertical-align: middle;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #495057;
+  font-family: inherit;
+}
+
+.form-check-label {
+  margin-top: 5px;
+  margin-left: 30px;
+  vertical-align: middle;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #495057;
+  font-family: inherit;
 }

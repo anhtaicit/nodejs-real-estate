@@ -1,13 +1,44 @@
 extends layout
 
 block content
-  h1= title
-  p.text-center QUOC BAO REAL ESTATE
+  p.text-center SÀN GIAO DỊCH BDS QUỐC BẢO
+  p.address ĐỊA CHỈ: B1.31 lô 10 - Khu đô thị sinh thái nam cầu Nguyễn Tri Phương - Q. Cẩm Lệ - TP Đà Nẵng
+  .phoneInfo
+    p.phone ĐIỆN THOẠI:
+    p.phoneNumber 0905.562.357 - 0983.837.250
   p.text-center(ng-show="loading")
     span.fa.fa-spinner.fa-spin.fa-3x 
+  button.btn.btn-primary(id="addNewBtn", type="button", data-toggle="modal", data-target="#addNewDialog") Thêm đất mới
+  #addNewDialog.modal.fade 
+    .modal-dialog.modal-sm
+      .modal-content
+        .modal-header
+          h4.modal-title Heading
+          button.close(type="button", data-dismiss="modal") &times;
+        .modal-body 
+          #landForm.row
+            .col-12
+              form(action="")
+                .form-group
+                  input(type="text",ng-model="formData.area" ,class="form-control input-lg text-center", placeholder="Khu")
+                  input(type="text",ng-model="formData.block" ,class="form-control input-lg text-center", placeholder="Lốc")
+                  input(type="text",ng-model="formData.portion" ,class="form-control input-lg text-center", placeholder="Lô")
+                  input(type="text",ng-model="formData.owner" ,class="form-control input-lg text-center", placeholder="Chủ đất")
+                  input(type="text",ng-model="formData.ownerPhone" ,class="form-control input-lg text-center", placeholder="SDT chủ đất")
+                  input(type="text",ng-model="formData.referrer" ,class="form-control input-lg text-center", placeholder="Người giới thiệu")
+                  input(type="text",ng-model="formData.referrerPhone" ,class="form-control input-lg text-center", placeholder="SDT người giới thiệu")
+                  input(type="text",ng-model="formData.depositDate" ,class="form-control input-lg text-center", placeholder="Ngày gửi")
+                  input(type="text",ng-model="formData.price" ,class="form-control input-lg text-center", placeholder="Giá")
+                  input(type="text",ng-model="formData.note" ,class="form-control input-lg text-center", placeholder="Ghi chú")
+                  input(type="checkbox",ng-model="formData.isSold" ,class="form-check-input", id="isSoldChk")
+                  label.form-check-label(for="isSoldChk") Đã bán?
+                  input(type="text",ng-model="formData.soldDate" ,class="form-control input-lg text-center", placeholder="Ngày bán")
+        .modal-footer
+          button(type="submit", class="btn btn-primary", ng-click="createLand()", ng-disabled="!formData.area", data-dismiss="modal") Add
+          button.btn.btn-danger(type="button", data-dismiss="modal") Đóng
   .row
     .table-responsive
-      table#landTable.table.table-striped.table-bordered.table-hover
+      table#landTable.table.table-striped.table-bordered.table-hover.table-condensed
         thead.thead-dark
           tr.filters
             th
@@ -23,8 +54,9 @@ block content
             th Ghi chú
             th Tình trạng
             th Ngày bán
+            th Ngày tạo
         tbody
-          tr(ng-repeat="land in lands")
+          tr(data-ng-repeat="land in lands")
             td
               button.btn.btn-danger(ng-click="deleteLand(land)") Xoá
             td(editable-text="land.area",e-form="landarea",ng-click="landarea.$show()", onaftersave="updateLand(land)") {{land.area}}
@@ -34,8 +66,9 @@ block content
             td(editable-text="land.ownerPhone",e-form="landownerPhone",ng-click="landownerPhone.$show()", onaftersave="updateLand(land)") {{land.ownerPhone}}
             td(editable-text="land.referrer",e-form="landreferrer",ng-click="landreferrer.$show()", onaftersave="updateLand(land)") {{land.referrer}}
             td(editable-text="land.referrerPhone",e-form="landreferrerPhone",ng-click="landreferrerPhone.$show()", onaftersave="updateLand(land)") {{land.referrerPhone}}
-            td(editable-text="land.depositDate",e-form="landdepositDate",ng-click="landdepositDate.$show()", onaftersave="updateLand(land)") {{land.depositDate}}
+            td(editable-text="land.depositDate",e-form="landdepositDate",ng-click="landdepositDate.$show()", onaftersave="updateLand(land)") {{land.depositDate | date:'dd/MM/yyyy'}}
             td(editable-text="land.price",e-form="landprice",ng-click="landprice.$show()", onaftersave="updateLand(land)") {{land.price}}
             td(editable-text="land.note",e-form="landnote",ng-click="landnote.$show()", onaftersave="updateLand(land)") {{land.note}}
-            td(editable-text="land.isSold",e-form="landisSold",ng-click="landisSold.$show()", onaftersave="updateLand(land)") {{land.isSold===false?"Chưa bán":"Đã bán"}}
+            td(editable-select="land.isSold",e-ng-options="s.value as s.text for s in soldStatus", e-form="landisSold",ng-click="landisSold.$show()", onaftersave="updateLand(land)") {{land.isSold===false?"Chưa bán":"Đã bán"}}
             td(editable-text="land.soldDate",e-form="landsoldDate",ng-click="landsoldDate.$show()", onaftersave="updateLand(land)") {{land.soldDate | date:'dd/MM/yyyy'}}
+            td {{land.addedDate | date:'dd/MM/yyyy'}}

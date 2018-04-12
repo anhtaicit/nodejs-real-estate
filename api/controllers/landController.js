@@ -36,7 +36,8 @@ controller.addLand = async (req, res) => {
         price: req.body.price,
         note: req.body.note,
         isSold: req.body.isSold,
-        soldDate: req.body.soldDate
+        soldDate: req.body.soldDate,
+        addedDate: Date.now()
     };
     try {
         const savedLand =  await Lands.addLand(landToAdd);

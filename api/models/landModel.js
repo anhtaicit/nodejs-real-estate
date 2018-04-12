@@ -13,7 +13,8 @@ var landSchema = new Schema({
     price: String,
     note: String,
     isSold: Boolean,
-    soldDate: Date
+    soldDate: Date,
+    addedDate: Date
 });
 
 var Lands = mongoose.model("Lands", landSchema);
